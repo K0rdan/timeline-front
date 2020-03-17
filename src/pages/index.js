@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { withApollo } from 'gql/client';
 import Home from 'pages/home';
 
 const Counter = () => {
@@ -29,7 +30,7 @@ const Counter = () => {
   return <div style={{ flex: 1 }}>{Math.round(count)}</div>;
 };
 
-const App = () => {
+const IndexComponent = () => {
   return (
     <div>
       <Counter />
@@ -38,4 +39,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default withApollo(IndexComponent);
