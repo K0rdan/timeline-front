@@ -9,7 +9,8 @@ import styles from 'pages/home/styles.less';
 
 const userQuery = gql`
   query {
-    user {
+    players {
+      id
       name
     }
   }
@@ -24,6 +25,7 @@ export const Home = () => {
     return <div>Loading...</div>;
   }
   if (data) {
+    console.log('Home / data', data);
     const [state, dispatch] = useReducer(gameReducer, defaultGameState);
     const { cards } = useContext(GameContext);
     return (

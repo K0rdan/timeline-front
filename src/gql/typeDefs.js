@@ -10,10 +10,5 @@ const baseTypeDefs = gql`
   }
 `;
 
-export const typeDefs = [baseTypeDefs];
-for (const typeDef in features.typeDefs) {
-  if (features.typeDefs.hasOwnProperty(typeDef)) {
-    typeDefs.push(features.typeDefs[typeDef]);
-  }
-}
+export const typeDefs = [baseTypeDefs, ...features.typeDefs];
 export default typeDefs;
