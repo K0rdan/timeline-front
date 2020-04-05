@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import logger from 'utils/logger';
 
 let globalApolloClient = null;
 
@@ -29,7 +30,7 @@ export const withApollo = (PageComponent, { ssr = true } = {}) => {
       PageComponent.displayName || PageComponent.name || 'Component';
 
     if (displayName === 'App') {
-      console.warn('This withApollo HOC only works with PageComponents.');
+      logger.warn('This withApollo HOC only works with PageComponents.');
     }
 
     WithApollo.displayName = `withApollo(${displayName})`;
@@ -74,7 +75,7 @@ export const withApollo = (PageComponent, { ssr = true } = {}) => {
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
-            console.error('Error while running `getDataFromTree`', error);
+            logger.error('Error while running `getDataFromTree`', error);
           }
 
           // getDataFromTree does not call componentWillUnmount

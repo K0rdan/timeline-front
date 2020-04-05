@@ -1,15 +1,16 @@
 import { schemaComposer, ObjectTypeComposer } from 'graphql-compose';
 import { composeWithMongoose } from 'graphql-compose-mongoose';
 import mongoose, { Schema } from 'mongoose';
+import logger from 'utils/logger';
+import { defaultMongoConfig } from 'utils/mongo';
 
 mongoose
   .createConnection('mongodb://localhost:27017/timeline-users', {
     dbName: 'timeline-users',
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    ...defaultMongoConfig,
   })
   .then(connection => {
-    //console.log('MongoDB / Users / connection / connection', connection);
+    logger.info(`Connection to MongoDB{Users} established ! 🚀`);
     const userSchema = new Schema(
       {
         name: {
@@ -57,6 +58,4 @@ mongoose
       });
     }
   })
-  .catch(err => {
-    console.log('MongoDB / Users / connection / err', err);
-  });
+  .catch(err => logger.err(err));

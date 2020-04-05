@@ -1,7 +1,9 @@
+const { parsed: env } = require('dotenv').config();
 const path = require('path');
 const withLess = require('@zeit/next-less');
 
 const withNextConfig = {
+  env,
   webpack: (config, { isServer }) => {
     config.resolve.alias['components'] = path.join(__dirname, 'src/components');
     config.resolve.alias['gql'] = path.join(__dirname, 'src/gql');
@@ -10,7 +12,7 @@ const withNextConfig = {
     config.resolve.alias['static'] = path.join(__dirname, 'public');
     config.resolve.alias['utils'] = path.join(__dirname, 'src/utils');
 
-    if (isServer) {
+    if (!isServer) {
       config.node = {
         fs: 'empty',
       };
