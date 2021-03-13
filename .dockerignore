@@ -1,0 +1,5 @@
+/dits/
+/node_modules/
+.gitignore
+Dockerfile
+tsconfig.json
